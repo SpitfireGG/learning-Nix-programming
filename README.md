@@ -1,11 +1,29 @@
-# learning-Nix-programming
-this is a repo alike the C_Guides for learning the functional nix programming language 
-fix
+# Learning Nix Programming 🌟
 
-**-Note-**
-<p>This is an attempt to make a straight forward repo from the resources that i learned from the web in a way that is sufficent enough to get started writing code in the Nix programming language</p></br>
-<p>Although i am not an expert at this language, this is just for learning and might help you understand the nix code much faster as the official nix documentation is quiet long and challenging to follow along</p>
+A repository similar to *C_Guides* for learning the functional **Nix** programming language.
 
+---
 
+## 📝 Note  
 
+This is an attempt to create a straightforward repository compiling resources I've learned from the web. The goal is to provide sufficient material to start writing code in the Nix programming language.
 
+While I'm not an expert in Nix, this guide may help you understand Nix code faster than the official documentation, which can be lengthy and challenging to follow.
+
+---
+
+## 📚 Topics Covered  
+
+This documentation covers all the basics of the Nix programming language:
+
+- **Integers**  
+- **Floats**  
+- **Strings**  
+- **Paths**  
+- **Booleans**  
+- **Null**  
+- **Lists**  
+- **Sets/Attribute Sets**  
+- **Functions**  
+
+Happy learning!
