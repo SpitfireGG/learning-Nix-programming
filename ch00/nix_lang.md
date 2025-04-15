@@ -1,4 +1,4 @@
-# Complete Nix Language Guide - From Zero to Advanced
+# Complete guide  to learning Nix programming language (mostly focusing on the Syntax & usage of Nix)
 
 *This is an attempt to creating a repo for learning nix programming language although i am not a professional programmer, i have been learning and studying stuffs i like and this might not only be helpful to you guys who are wanting to learn nix from the ground up but for me too. These days most of the developers tend to rely on AI for learning but still i am making this, just for fun. I hope you will provide me with a feedback on how i should takes things forward
 
