@@ -81,8 +81,12 @@ Why cool: Fearless experiment—try new GLFW version, rollback if it buggy.
 ### 5. Flakes
 
 What it mean: Flakes is new way to organize Nix project, make them more standard and reproducible.
+flakes is still experimental as of till now, but the chances of breaking something after using it is still a no no.
 How it work: A flake.nix file define input (like nixpkgs version) and output (like package, shell). A flake.lock pin exact version for everything.
-Example: Your C_guides flake.nix:{
+
+Example: Your C_guides flake.nix:
+```Nix
+{
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
   };
@@ -92,12 +96,18 @@ Example: Your C_guides flake.nix:{
     };
   };
 }
+```
 
-Run nix develop, and you get GLFW shell. flake.lock ensure same version everywhere.
+Run: 
+```bash
+nix develop
+```
+
+you will get a shell where GLFW is installed. flake.lock ensure same version everywhere.
 Why cool: Share C_guides with friend—they get exact same environment. No "I forgot to install X."
 Note: Flakes still experimental, so some command need --extra-experimental-features flakes.
 
-6. Nix-Shells
+### 6. Nix-Shells
 
 What it mean: Temporary environment with specific package, no change to system.
 How it work: Run nix-shell -p python3, get Python 3 shell. Exit, and it gone—no mess.
@@ -107,35 +117,35 @@ gcc --version  # GCC 13
 Exit, and your system GCC unchanged.
 Why cool: Try tool for C project (like clang) without install permanent. Like virtualenv, but for any language.
 
-7. Package Isolation
+### 7. Package Isolation
 
 What it mean: Every package live in own folder in /nix/store, no conflict.
 How it work: Path like /nix/store/abcd123-gcc-12.2.0 unique for each version and dependency. Two GCC version can exist same time.
 Example: In C_guides, you use GLFW 3.3.8 for one project, 3.3.9 for another—no clash.
 Why cool: No "dependency hell" when you build game with old library.
 
-8. Binary Caching
+### 8. Binary Caching
 
 What it mean: Download pre-built package instead of compile.
 How it work: Nix check cache (like cache.nixos.org) for package with same hash. If found, download; if not, build.
 Example: Your flake.nix want GLFW. Nix download it in second, no compile.
 Why cool: Fast setup for C_guides, even on slow laptop.
 
-9. Multi-Version Support
+### 9. Multi-Version Support
 
 What it mean: Run different version of same software at same time.
 How it work: Each version have own /nix/store path, so no overwrite.
 Example: You test C_guides with gcc12 and gcc13 in two terminal, no conflict.
 Why cool: Compare compiler bug without uninstall/install.
 
-10. Lazy Evaluation
+### 10. Lazy Evaluation
 
 What it mean: Nix only compute what needed, not whole file.
 How it work: If you change one package in flake.nix, Nix only rebuild that, not everything.
 Example: Update GLFW in C_guides, other package (like make) skip rebuild.
 Why cool: Save time when tweak big project.
 
-11. Module System
+### 11. Module System
 
 What it mean: NixOS use module to organize config, like puzzle piece.
 How it work: Each module (e.g., SSH, GNOME) define option. Combine them in configuration.nix.
@@ -147,41 +157,41 @@ Why cool: Simple to add feature to system, no edit 10 file like Arch.
 Cool Things Nix/NixOS Do (Not Other Distro)
 NixOS and Nix have trick other distro (Ubuntu, Arch, Fedora) can’t do easy:
 
-System as Code:
+* System as Code:
 
 Whole NixOS system is one Nix file (configuration.nix or flake.nix). Copy to new PC, run nixos-rebuild switch, get same system.
 Example: Your C_guides laptop crash. Restore flake.nix on new PC, and it same as before—same GCC, same GLFW.
 Other distro: Need script, manual install, hope it match.
 
 
-Dev Environment Sharing:
+* Dev Environment Sharing:
 
 Flakes let you share exact dev setup. Your C_guides flake.nix give friend same compiler, library, even VS Code plugin.
 Other distro: Friend install manual, maybe miss package.
 
 
-No Global State:
+* No Global State:
 
 NixOS don’t use /bin or /usr. Everything in /nix/store. No "package overwrite system file" mess.
 Example: Install two GLFW version, no break system.
 Other distro: One version at time, or hack with LD_LIBRARY_PATH.
 
 
-Atomic System Update:
+* Atomic System Update:
 
 Update NixOS is all-or-nothing. If fail, system stay old state.
 Example: Add broken library to C_guides system, reboot, pick old generation—safe.
 Other distro: Update fail, maybe no boot.
 
 
-Reproducible Builds:
+* Reproducible Builds:
 
 Same Nix code, same binary, even years later. flake.lock lock dependency.
 Example: Build C_guides game in 2025, rebuild in 2030—same result.
 Other distro: Old package gone, good luck.
 
 
-Nix Shell for Testing:
+* Nix Shell for Testing:
 
 Try tool temporary, no install. Like Docker, but lighter.
 Example: nix-shell -p valgrind to debug C_guides memory leak, exit, gone.
@@ -191,194 +201,79 @@ Other distro: Install, maybe conflict, uninstall manual.
 Custom Package Easy:
 
 Write Nix file to build any software, no mess with RPM/DEB.
-Example: Add new C tool to C_guides:pkgs.stdenv.mkDerivation {
+Example:
+
+```nix
+pkgs.stdenv.mkDerivation {
   name = "mytool";
   src = ./mytool.tar.gz;
 }
+```
 
 
-Other distro: Learn AUR, pray it work.
-
-
-Pros of Nix and NixOS
-
-Reproducibility:
-Same setup anywhere. Your C_guides flake.nix work on Mac, Linux, even CI server.
-
-
-Safety:
-Rollback any change—package, system, or dev shell. Break C_guides? Go back.
-
-
-Isolation:
-No dependency conflict. Use old GLFW for one project, new for another.
-
-
-Flexibility:
-Nix run on any Linux, Mac, even WSL. NixOS let you config everything (kernel, service).
-
-
-Community Package:
-nixpkgs have 80,000+ package—more than Arch AUR. Find GCC, Python, even niche C lib.
-
-
-Dev Power:
-Flakes and nix-shell make dev setup instant. Share C_guides with one file.
-
-
-Atomic Update:
-No half-broken system. Update C_guides environment, it work or revert.
+<p>Other distro: Learn AUR, pray it work.</p>
 
 
 
-Cons of Nix and NixOS
-Nix and NixOS not perfect. Here problem, especial compare to other distro:
-
-Steep Learning Curve:
-Nix language is new. Even simple task (install GCC) need learn syntax.
-Example: Ubuntu: apt install gcc. Nix: Write environment.systemPackages = [ pkgs.gcc ];.
-Fix: Start with nix-shell -p gcc for easy test.
-
-
-Bad Documentation:
-Official doc confuse, focus on old way (nix-env), not flakes. Flakes doc especial weak.
-Example: You want learn flakes for C_guides, but find old shell.nix guide.
-Fix: Use community guide, like “NixOS & Flakes Book”.
-
-
-Error Message Suck:
-Nix error cryptic, like “infinite recursion.” Hard to debug C_guides flake.nix.
-Fix: Use nix repl to test code step-by-step.
-
-
-Flakes Experimental:
-Flakes not stable, need special flag (--extra-experimental-features). Some tool not support yet.
-Example: Your C_guides flake work, but old Nix version break.
-Fix: Use Nix 2.24+ for flake support.
-
-
-Slow First Build:
-If no binary cache, Nix compile everything. Slow for big package like GCC.
-Example: Build C_guides with new library, wait 10 minute.
-Fix: Check cache.nixos.org first.
-
-
-NixOS Complexity:
-NixOS need know Linux well. Simple task (set keyboard) need Nix code, not GUI.
-Example: Change Wi-Fi in Ubuntu: click icon. NixOS: edit networking.wireless.
-Fix: Use NixOS with desktop like GNOME first.
-
-
-Not Standard:
-NixOS ignore Linux standard (/bin, /usr). Some software expect /bin/bash, break.
-Example: Your C_guides script assume /usr/lib, fail on NixOS.
-Fix: Use patchelf or wrap script.
-
-
-Small Community:
-Less user than Ubuntu. Hard to find help for C_guides Nix issue.
-Fix: Join NixOS Discord or Reddit.
-
-
-
-Compare to Other Distros
-
-Ubuntu:
-Pro: Easy, big community, GUI tool. Install GLFW: apt install libglfw3.
-Con: Dependency conflict, no rollback, not reproducible.
-NixOS Win: Reproducible C_guides setup, rollback if GLFW break.
-
-
-Arch:
-Pro: AUR have many package, bleeding-edge, ArchWiki great.
-Con: Update can break system, no atomic update.
-NixOS Win: Safe update, share C_guides flake easy.
-
-
-Fedora:
-Pro: Stable, modern, good for dev.
-Con: Limited package, no multi-version easy.
-NixOS Win: Run GCC 12 and 13 same time for C_guides.
-
-
-
-NixOS best if you want control and reproducibility, but hard if you new to Linux. Ubuntu or Arch easier for beginner.
-Useful Nix Commands
-Beginner Commands
-
-Try Package Temporary:nix-shell -p gcc
+Try Package Temporary:
+```bash
+nix-shell -p gcc
+```
 
 Get GCC shell, exit to remove. Good for test tool in C_guides.
-Install Package (Non-NixOS):nix profile install nixpkgs#glfw
 
-Add GLFW to user profile, like apt install.
-Search Package:nix search nixpkgs glfw
+Install Package (Non-NixOS):
+```bash
+nix profile install nixpkgs#glfw
+```
+
+Add GLFW to user profile, like apt install. search package:
+```bash
+nix search nixpkgs glfw
+```
 
 Find GLFW version for C_guides.
-Enter Flake Shell:nix develop
+Enter a flake shell
+```
+nix develop
+```
 
 Use C_guides flake.nix to get dev environment.
-Update System (NixOS):sudo nixos-rebuild switch
+Update System (NixOS):
+
+```
+sudo nixos-rebuild switch
+or 
+sudo nixos-rebuild switch --flake .#<username> to build the system with flakes
+```
 
 Apply configuration.nix change, like add SSH.
 
-Intermediate Commands
+## Intermediate Commands
 
-Build Flake Output:nix build .#mygame
+Build Flake Output:nix build .#<your-program>
 
 Build C_guides game from flake.nix.
 Update Flake Lock:nix flake update
 
 Refresh C_guides dependency to latest.
-Rollback Profile:nix profile rollback
+Rollback Profile:
+```bash
+nix profile rollback
+```
 
 Undo bad package install.
-Garbage Collect:nix-collect-garbage
+
+Garbage Collect:
+```bash
+nix-collect-garbage
+```
 
 Free space by remove old /nix/store file.
-Check Flake Syntax:nix flake check
-
-Debug C_guides flake.nix error.
-
-Example: C_guides with Nix
-Here how you use Nix for your GLFW triangle game:
-
-Create Flake:{
-  inputs = { nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11"; };
-  outputs = { self, nixpkgs }: {
-    packages.x86_64-linux.default = nixpkgs.legacyPackages.x86_64-linux.stdenv.mkDerivation {
-      name = "triangle";
-      src = ./.;
-      buildInputs = [ nixpkgs.legacyPackages.x86_64-linux.glfw nixpkgs.legacyPackages.x86_64-linux.libGL ];
-      buildPhase = "gcc main.c -lglfw -lGL -o triangle";
-      installPhase = "mkdir -p $out/bin; cp triangle $out/bin";
-    };
-  };
-}
+Check Flake Syntax:
+```bash
+nix flake check
+```
 
 
-Build Game:nix build
-./result/bin/triangle
-
-
-Dev Shell:nix develop
-gcc main.c -lglfw -lGL
-
-
-Share:
-Push flake.nix to GitHub (C_guides repo).
-Friend clone, run nix build, get same game.
-
-
-
-This show power of Nix—build, test, share, all reproducible.
-Conclusion
-Nix and NixOS is amazing for who love control, like you with C_guides. Feature like flakes, nix-shells, and atomic update make dev life easy and safe. You can build GLFW game, share with friend, rollback if break, no worry. But it hard to learn, doc not great, and error confuse. Compare to Ubuntu or Arch, NixOS need more brain, but give more power.
-For you, I suggest:
-
-Start with nix-shell -p gcc to play.
-Use C_guides flake for GLFW project.
-Join NixOS Discord if stuck.
-
-I hope this help you love Nix like I do! If you want, I can explain more command or debug your C_guides flake.nix. Sorry if my English not perfect, but I try hard to share knowledge.
-
+<p>I hope this help you love Nix like I do! If you want, I can explain more command or debug your C_guides flake.nix. Sorry if my English not perfect, but I try hard to share knowledge.</p>
