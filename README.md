@@ -26,4 +26,17 @@ This documentation covers all the basics of the Nix programming language:
 - **Sets/Attribute Sets**  
 - **Functions**  
 
+
+<div align="center">
+
+✨ **If you find this repository helpful, please consider giving it a star!** ⭐  
+It helps others discover this resource and motivates me to keep improving it.
+
+</div>
+
+
 Happy learning!
+
+
+
+
