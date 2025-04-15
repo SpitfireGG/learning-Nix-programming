@@ -1,10 +1,10 @@
 # Complete Nix Language Guide - From Zero to Advanced
 
-*Written by a Nix learner for other learners - please excuse my English mistakes*
+*This is an attempt to creating a repo for learning nix programming language although i am not a professional programmer, i have been learning and studying stuffs i like and this might not only be helpful to you guys who are wanting to learn nix from the ground up but for me too. These days most of the developers tend to rely on AI for learning but still i am making this, just for fun. I hope you will provide me with a feedback on how i should takes things forward
 
 ## Introduction to Nix Language
 
-Nix is functional programming language what is mainly used for Nix package manager and NixOS configuration. It is not like normal languages you know before. First time can be confusing but when you understand the concepts becomes very powerful tool.
+Nix is functional programming language what is mainly used for Nix package manager and NixOS configuration. It is not like normal languages you & I know before. First time can be confusing but when you understand the concepts becomes very powerful tool.
 Nix provides many useful functionality by itself like creating an isolated environment while creating projects, controlling version collision is what i love the most about it and can be defined in a single file unlike other distros that do not provide isolation between dependencies and when programs need to shuffle between different version of the same dependencies
 
 ### Why Learn Nix?
