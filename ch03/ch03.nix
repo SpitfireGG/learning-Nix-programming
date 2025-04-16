@@ -43,16 +43,36 @@ let
   # check if the element exists or not
   has_3 = builtins.elem 3 nums; # check if number 3 exists in the set
 
+  # concatenating lists
+  concat = nums ++ [
+    10
+    20
+    30
+    40
+  ];
+  has_10 = builtins.elem 10 concat; # check if number 10 exists in the set
+
+  # if you have seen maps in javascript , this is the same in nix
+
+  #3
+  squared_nums = map (x: x * x) concat;
+  evenSquared = map (x: x * x) (builtins.filter (x: lib.mod x 2 == 1) concat); # the modulo does not works in nix and you might be getting a toke n error so use mod function ins
+
 in
 # findSet = builtins.filter (x: builtins.isAttrs x )mixed;
 
-if has_3 == false then
+if has_10 == false then
   {
-    message = "the number does not exists";
+    message = "the number 10 does not exists";
   }
 else
   #the builtins.trace takes 2 args <message> & <value>
-  (builtins.trace) "the type of nums is:" (builtins.typeOf nums)
+
+  #  (builtins.trace) " number 10 exists " (builtins.elem 10 concat)
+
+  evenSquared
+
+#3 squared_nums
 
 #1. (builtins.elemAt mixed 4).prop.name
 
