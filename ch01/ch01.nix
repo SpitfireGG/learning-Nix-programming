@@ -1,4 +1,18 @@
 # purpose : to gain insight on working with basic data types in nix ( if you feel confused because you don't have experience with any functional programming language, don't feel demotivated, please don't you will get over it as we keep on progressing ) there is still much to come
+
+# about : the let-in statement
+
+/*
+  the let-in in nix is the fundamental binding constructor that creates a local scope Where the bindings are visible, also
+  the variables are immutable in nix ( meaning  they cannot be changed once defined )
+
+  construct:
+    let
+      <binding>
+    in
+    <expression>
+*/
+
 {
   # working with strings
   print = "basic data types";
@@ -8,9 +22,9 @@
   '';
   message =
     let
-      name = "readers";
+      name = "readers"; # here 'name' is the binding
     in
-    "Hello there ${name}";
+    "Hello there ${name}"; # and the binding can be accessed here in the 'in' block cuz the variables is in the scope
 
   # working with numbers and floats
   int_operation =
