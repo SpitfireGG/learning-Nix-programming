@@ -43,6 +43,10 @@ let
   # check if the element exists or not
   has_3 = builtins.elem 3 nums; # check if number 3 exists in the set
 
+  #generating a list with the builtin function
+  mkList = builtins.genList (i: i * 2) 5; # creates a list strating from idx 0, [ 0 1 2 3 4] * 2
+  toStr = builtins.genList (i: "item-${toString i}") 3;
+
   # concatenating lists
   concat = nums ++ [
     10
@@ -68,9 +72,13 @@ if has_10 == false then
 else
   #the builtins.trace takes 2 args <message> & <value>
 
-  #  (builtins.trace) " number 10 exists " (builtins.elem 10 concat)
+  toStr
 
-  evenSquared
+#  (builtins.trace) " number 10 exists " (builtins.elem 10 concat)
+
+#5  mkList
+
+#4 evenSquared
 
 #3 squared_nums
 
