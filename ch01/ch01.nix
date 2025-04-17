@@ -1,5 +1,6 @@
+# purpose : to gain insight on working with basic data types in nix ( if you feel confused because you don't have experience with any functional programming language, don't feel demotivated, please don't you will get over it as we keep on progressing ) there is still much to come
 {
-  # string
+  # working with strings
   print = "basic data types";
   multi_line = ''
     this is a multi_line string
@@ -7,12 +8,11 @@
   '';
   message =
     let
-
-      name = "devs";
+      name = "readers";
     in
     "Hello there ${name}";
 
-  # numbers
+  # working with numbers and floats
   int_operation =
     let
       x = 1;
@@ -32,6 +32,6 @@
     d + 1;
 
 }
+# you can run the nix program by running in the termainal
 
-# runnning is the same as previous one
-# run : nix eval --file ch01.nix <declarations like print, message etc>
+# nix eval --file ch01.nix <one of the declarations like print, message etc>
