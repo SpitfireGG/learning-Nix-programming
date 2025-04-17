@@ -1,6 +1,6 @@
-# Learning Nix Programming 🌟
+# Learning the Nix Programming language by doing 🌟
 
-A repository similar to *C_Guides* for learning the functional **Nix** programming language.
+A repository similar to *C_Guides* for learning the fully functional **Nix** programming language.
 
 ---
 
@@ -31,17 +31,11 @@ This documentation covers all the basics of the Nix programming language:
 - **more will be added soon**
 
 
-
+---
 <div align="center">
 
 ✨ **If you find this repository helpful, please consider giving it a star!** ⭐  
 It helps others discover this resource and motivates me to keep improving it.
 
 </div>
-
-
-<div> </div>
-
-
-
 
