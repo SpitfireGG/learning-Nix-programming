@@ -24,7 +24,12 @@ This documentation covers all the basics of the Nix programming language:
 - **Null**  
 - **Lists**  
 - **Sets/Attribute Sets**  
+- **Builtin Expression & constructors**
 - **Functions**  
+- **Lazy Evaluation**
+- **Debugging**
+- **more will be added soon**
+
 
 
 <div align="center">
@@ -35,7 +40,7 @@ It helps others discover this resource and motivates me to keep improving it.
 </div>
 
 
-Happy learning!
+<div> </div>
 
 
 
