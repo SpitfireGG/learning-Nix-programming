@@ -96,6 +96,8 @@ in
     port = 8080;
     overrides = userConfig;
   };
+  safetyCheck = userConfig.serverCfg.extraConfig.field or "the maximum number is not set";
+  # the or keyword is what you are thinking it does, it is kinda if else statement in itself
 }
 
 # try creating your own pseudo configuration just like in the examples
