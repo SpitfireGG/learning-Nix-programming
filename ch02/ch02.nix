@@ -7,10 +7,10 @@
 # section 1
 let
   person = {
-    name = "scoop";
+    name = "scoop"; # the attribute name 'name' in this case doesnot have to be inside the quotes but the value needs to be, Also when assigned an attribute with a value it must end with ';'
     age = 10;
     address = "kathmandu, Nepal";
-  };
+  }; # also the end of the list must also have ';' in the end
 in
 person.address
   # run with nix eval --file ch02.nix
@@ -34,6 +34,7 @@ person.address
 
   # section 3
   # Recursive sets
+  # Unlike the ordinary set, the recursive set which allows the attributes from within the set without any further let-in constructs
   rec {
     x = 1;
     y = x + 1;
