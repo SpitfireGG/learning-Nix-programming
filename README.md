@@ -84,6 +84,11 @@ learning_path = lib.foldl (acc: x -> acc + x) 0 [
 [![Star History Chart](https://api.star-history.com/svg?repos=SpitfireGG/learning-Nix-programming&type=Date)](https://www.star-history.com/#SpitfireGG/learning-Nix-programming&Date)
 </div>
 
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=SpitfireGG/learning-Nix-programming&type=Date)](https://www.star-history.com/#SpitfireGG/learning-Nix-programming&Date)
+
+
 ---
 
 You can contibute to the repo for the new commers to learn actively, you're contributions matter:
