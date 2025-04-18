@@ -26,6 +26,7 @@ This documentation covers all the basics of the Nix programming language:
 - **Sets/Attribute Sets**  
 - **Builtin Expression & constructors**
 - **Functions**  
+- **Working with files and paths**
 - **Lazy Evaluation**
 - **Debugging**
 - **more will be added soon**
