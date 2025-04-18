@@ -16,21 +16,21 @@ While I'm not an expert in Nix, this guide may help you understand Nix code fast
 
 This documentation covers all the basics of the Nix programming language:
 
-- [x] **Floats**  
-- [x] **Integers**  
-- [x] **Strings**  
-- [x] **Paths**  
-- [x] **Booleans**  
-- [x] **Null**  
-- [x] **Lists**  
-- [x] **Sets/Attribute Sets**  
-- [x] **Builtin Expression & constructors**
-- [x] **Functions**  
-- [x] **Working with files and paths**
-- [x] **Lazy Evaluation**
-- [x] **Debugging**
+- [x] Floats
+- [x] Integers
+- [x] Strings
+- [x] Paths
+- [x] Booleans
+- [x] Null
+- [x] Lists
+- [x] Sets/Attribute Sets
+- [x] Builtin Expression & constructors
+- [x] Functions
+- [x] Working with files and paths
+- [x] Lazy Evaluation
+- [ ] Debugging
 
-- **more will be added soon**
+== more will be added soon ==
 
 ---
 <div align="center">
