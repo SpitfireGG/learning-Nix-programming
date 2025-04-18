@@ -4,7 +4,7 @@
 
 <div align="center">
 
-[![Nix Version](https://img.shields.io/badge/Nix-2.23.1-blue?logo=nixos&logoColor=white)](https://nixos.org)
+[![Nix Version](https://img.shields.io/badge/Nix-2.24.12-blue?logo=nixos&logoColor=white)](https://nixos.org)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
@@ -16,9 +16,8 @@
 
 This repository takes a hands-on approach to learning Nix, structured like popular programming guides but with a functional twist. Perfect for those who learn by doing!
 
-# 📘 Curriculum Roadmap
 
-## 🔑 Core Language Fundamentals
+## Nix Language Fundamentals
 
 ### Basic Types
 - Integers • 42
