@@ -77,17 +77,10 @@ learning_path = lib.foldl (acc: x -> acc + x) 0 [
 ];
 ```
 
-## 🌟 Community Love
-
-## Star History
-
-[![Star History Chart](https://api.star-history.com/svg?repos=SpitfireGG/learning-Nix-programming&type=Date)](https://www.star-history.com/#SpitfireGG/learning-Nix-programming&Date)
-
-
 ---
 
 <p>You can contibute to the repo for the new commers to learn actively, you're contributions matter:
-If you:</br>
+If you:</p>
 🐛 Found a bug? Open an Issue</br>
 💡 Got an idea? Suggest Content</br>
 📝 Fixed a typo? Submit PR</br>
