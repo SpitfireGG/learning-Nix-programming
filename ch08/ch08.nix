@@ -1,88 +1,149 @@
-# debugging in nix
+# Debugging in Nix: From Basic Tracing to Advanced Techniques
+# -----------------------------------------------------------
 
+## 1. Basic Tracing with builtins.trace
 /*
-  we have already seen the usage of the nix builtin function : builtins.trace in action
-  we will learn about some more advanced techniques in the nix ecosystem for debugging and tracing logs
+  shows simple message logging while returning values
+  run the following codes with (--json | jq) for best logs tracing
 */
 
-#1. basic log tracing with trace function ( run with --json | jq for readability )
-
-/*
-  let
-    integerVal = 10;
-    stringVal = "string";
-  in
-  if (builtins.typeOf integerVal) != (builtins.typeOf stringVal) then
-    builtins.trace "Comparision of int to string" { inherit integerVal stringVal; }
-  else
-    builtins.trace "types matched!" {
-      inherit integerVal stringVal;
-    }
-*/
-
-#use the standard library to include functions for more thorough debuggings
-
-#2. the traceVal attribute to trace the value and return it.
-
-/*
-  let
-    lib = import <nixpkgs/lib>;
-    str = "tracing with debug.traceVal";
-    valTrace = lib.debug.traceVal str;
-  in
-  valTrace
-*/
-
-#3. the traceValFn attribute, traceValFn traces the supplied value after applying a function to it, and return the original value.
-/*
-  let
-    lib = import <nixpkgs/lib>;
-    x = {
-      a = 1;
-      b = 2;
-      c = 3;
-    };
-    y = lib.debug.traceValFn (v: "result of expression x : ${builtins.toJSON v}") x;
-  in
-  y
-*/
-
-#basic example:
-/*
-  let
-    debug = true;
-    x = 10;
-    y = "string";
-
-    valCheck =
-      if (builtins.typeOf x) == (builtins.typeOf y) && debug then
-        (builtins.trace) "type matched" { inherit x y; }
-      else
-        (builtins.trace) "incorrect type, converting x to string and concatenating x ->  ${toString x}" (
-          toString x
-        )
-        + y;
-  in
-  {
-    inherit x y;
-    check = valCheck;
+let
+  integerVal = 10;
+  stringVal = "string";
+in
+if (builtins.typeOf integerVal) != (builtins.typeOf stringVal) then
+  builtins.trace "Comparing int to string (type mismatch)" {
+    inherit integerVal stringVal;
   }
-*/
+else
+  builtins.trace "Types matched!" {
+    inherit integerVal stringVal;
+  }
 
-# example 2
+
+## 2. Value Tracing with traceVal
 /*
-  let
-    lib = import <nixpkgs/lib>;
-    path = ./test.txt;
-    fileContent = lib.debug.traceValFn (
-      x:
-      "reading ${toString path} : ${if (builtins.pathExists path) then "path exists" else "path missing"}"
-    ) (builtins.readFile path);
-  in
-  fileContent
+  Logs values without modifying them - great for quick inspections
 */
 
-#traceValSeq attribute forces evaluation of a value (overriding lazy evaluation) and prints it
+let
+  lib = import <nixpkgs/lib>;
+  str = "tracing-with-debug.traceVal";
+  valTrace = lib.debug.traceVal str;
+in
+valTrace
+
+
+## 3. Custom Tracing with traceValFn
+/*
+  Applies custom formatting before logging - perfect for complex data
+*/
+
+let
+  lib = import <nixpkgs/lib>;
+  x = { a = 1; b = 2; c = 3; };
+  y = lib.debug.traceValFn (v: 
+    "Processed value: ${builtins.toJSON v}"
+  ) x;
+in
+y
+
+
+## 4. Type Checking Example
+/*
+  Demonstrates runtime type validation with debug tracing
+*/
+
+let
+  debug = true;
+  x = 10;
+  y = "string";
+
+  valCheck = 
+    if (builtins.typeOf x) == (builtins.typeOf y) && debug then
+      builtins.trace "Type matched" { inherit x y; }
+    else
+      builtins.trace 
+        "Type mismatch! Converting x (${toString x}) to string" 
+        (toString x + y);
+in
+{
+  inherit x y;
+  check = valCheck;
+}
+
+
+## 5. File Operations Debugging
+/*
+  Shows file handling with error tracing and safety checks
+*/
+
+let
+  lib = import <nixpkgs/lib>;
+  path = ./test.txt;
+  fileContent = lib.debug.traceValFn (x:
+    "File ${toString path}: ${if builtins.pathExists path 
+      then "Exists (${toString (builtins.stringLength x)} chars)" 
+      else "Missing!"
+    }"
+  ) (builtins.readFile path);
+in
+fileContent
+
+
+## 6. Safe File Reading with Error Handling
+/*
+  Implements try/catch pattern for robust file operations
+*/
+
+let
+  filePath = ./non-existing-file.txt;
+  readFileSafe = path:
+    if builtins.pathExists path then
+      builtins.readFile path
+    else
+      throw "File ${toString path} not found!";
+
+  fileContent = let
+    result = builtins.tryEval (readFileSafe filePath);
+  in
+    if result.success then
+      result.value
+    else
+      builtins.trace "Error caught: ${result.value}" null;
+in
+fileContent
+
+
+## 7. Custom Debug Utilities
+/*
+  Creates reusable debug functions for complex workflows
+*/
+
+let
+  lib = import <nixpkgs/lib>;
+
+  Debug = operation: path: value:
+    lib.debug.traceValFn (x:
+      "${operation} on ${toString path}: ${
+        if builtins.pathExists path then "Exists" else "Missing"
+      }\nRaw value: ${builtins.toJSON x}"
+    ) value;
+
+  filePath = ./test.txt;
+  dir = ./.;
+in
+{
+  readFileContent = Debug "File read" filePath (builtins.readFile filePath);
+  readDir = Debug "Directory scan" dir (builtins.readDir dir);
+}
+
+
+## 8. Deep Structure Tracing
+/*
+  demonstrates nested data inspection with lazy evaluation control
+*/
+
 let
   lib = import <nixpkgs/lib>;
   nestedStructure = {
@@ -93,38 +154,16 @@ let
       x = 1;
       y = 2;
       z = 3;
-
-      lazy = "this won't be evaluated";
+      lazy = "Unevaluated section";
     };
     moreNesting = [
-      {
-        data = {
-          location = "asia";
-          weather = "cloudy";
-          time = "12:12:30";
-          am = true;
-        };
-      }
-      {
-        api = {
-          weather = "weather.api.com";
-          time = [
-            "1 pm"
-            "2 pm"
-          ];
-        };
-
-      }
-      { lazyII = "this won't be evaluated too"; }
+      { data = { location = "Asia"; weather = "Cloudy"; time = "12:12:30"; }; }
+      { api = { weather = "weather.api.com"; time = ["1 pm" "2 pm"]; }; }
+      { lazyII = "Another unevaluated section"; }
     ];
   };
-  traceI = (builtins.trace) "tracing traceI" lib.debug.traceSeq nestedStructure nestedStructure;
-  traceII =
-    (builtins.trace) "tracing traceII" lib.debug.traceSeq nestedStructure.moreNesting
-      nestedStructure.moreNesting;
-
 in
 {
-  trace1 = traceI;
-  inherit traceII;
+  trace1 = lib.debug.traceSeq nestedStructure nestedStructure;
+  trace2 = lib.debug.traceSeq nestedStructure.moreNesting nestedStructure.moreNesting;
 }
