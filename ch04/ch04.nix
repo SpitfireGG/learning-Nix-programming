@@ -1,5 +1,6 @@
 # comprehensive guide to functions in nix
-# one thing i noticed is that the output is sometimes ranndom like when working with maps or something , i think this is due to the lazy evaluation of the nix programming language
+
+# one thing i noticed is that the output is sometimes random like when working with maps or something , i think this is due to the lazy evaluation of the nix programming language but if you can find more about it if you dive deeper into the lannguage specifications and implementation
 
 let
 

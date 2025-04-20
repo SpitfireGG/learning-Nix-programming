@@ -102,9 +102,11 @@ let
     if builtins.pathExists path then
       builtins.readFile path
     else
-      throw "File ${toString path} not found!";
+# the throw keyword aborts the evaluation and when trying to evalutate a set of deriavtions , if success returns true else false
+    throw "File ${toString path} not found!";
 
-  fileContent = let
+  fileContent = let               
+# tryEval returns a value from the epxpression and only works with throw and abort
     result = builtins.tryEval (readFileSafe filePath);
   in
     if result.success then
@@ -141,7 +143,7 @@ in
 
 ## 8. Deep Structure Tracing
 /*
-  demonstrates nested data inspection with lazy evaluation control
+  demonstrates a nested data inspection with lazy evaluation control
 */
 
 let

@@ -1,11 +1,13 @@
-#list operations
+# Lists
+# =================================
 
 let
-
-  # importing the list lib
   lib = import <nixpkgs/lib>;
 
+  # Section 1: Basic List Creation
+  # ------------------------------
   empty_set = [ ];
+
   nums = [
     1
     2
@@ -13,6 +15,7 @@ let
     4
     5
   ];
+
   mixed = [
     1
     2
@@ -20,71 +23,131 @@ let
     "string"
     {
       prop = {
-        name = "string";
-        age = 21;
+        program = "nix";
+        version = "2.1.14";
+        isInterpreted = true;
       };
     }
   ];
 
-  # basic list operations with lib
+  # Section 2: Core List Operations
+  # -------------------------------
+  # Basic accessors
+  first = builtins.head nums; # First element
+  remaining = builtins.tail nums; # All except first
+  grabFromIdx = builtins.elemAt nums 2; # Element at index 2
 
-  # grabs the first element in the list
-  first = builtins.head nums;
+  # List analysis
+  len = builtins.length nums; # get the length
+  has_3 = builtins.elem 3 nums;
 
-  # grabs the first element in the list ( all except the 1st one from the list)
-  remaining = builtins.tail nums;
+  # Section 3: List Generation
+  # --------------------------
+  mkList = builtins.genList (i: i * 2) 5; # [0 2 4 6 8]
+  toStr = builtins.genList (i: "item-${toString i}") 3; # ["item-0" "item-1" "item-2"]
 
-  # grab the  element from the index
-  grabFromIdx = builtins.elemAt nums 2; # gets the value at index 2
-
-  # get the length of the list
-  len = builtins.length nums;
-
-  # check if the element exists or not
-  has_3 = builtins.elem 3 nums; # check if number 3 exists in the set
-
-  #generating a list with the builtin function
-  mkList = builtins.genList (i: i * 2) 5; # creates a list strating from idx 0, [ 0 1 2 3 4] * 2
-  toStr = builtins.genList (i: "item-${toString i}") 3;
-
-  # concatenating lists
+  # Section 4: List Manipulation
+  # ----------------------------
+  # Concatenation
   concat = nums ++ [
     10
     20
     30
     40
   ];
-  has_10 = builtins.elem 10 concat; # check if number 10 exists in the set
+  has_10 = builtins.elem 10 concat;
 
-  # if you have seen maps in javascript , this is the same in nix
-
-  #3
+  # Functional operations
   squared_nums = map (x: x * x) concat;
-  evenSquared = map (x: x * x) (builtins.filter (x: lib.mod x 2 == 1) concat); # the modulo does not works in nix and you might be getting a toke n error so use mod function ins
+
+  # Note: Using lib.mod instead of % operator
+  evenSquared = map (x: x * x) (builtins.filter (x: lib.mod x 2 == 1) concat);
+
+  # Section 5: Advanced Operations
+  # -----------------------------
+  # Filtering attribute sets from mixed list
+  findSet = builtins.filter (x: builtins.isAttrs x) mixed;
+
+  # Fold demonstration
+  foldFn = builtins.foldl' (acc: elem: acc + elem) 0 [
+    1
+    2
+    3
+    4
+  ];
+  /*
+    breaking down the foldl process
+    1. Start with acc = 0
+    2. 0 + 1 → acc = 1
+    3. 1 + 2 → acc = 3
+    4. 3 + 3 → acc = 6
+    5. 6 + 4 → final acc = 10
+  */
 
 in
-# findSet = builtins.filter (x: builtins.isAttrs x )mixed;
+{
+  inherit
+    empty_set
+    nums
+    mixed
+    first
+    remaining
+    grabFromIdx
+    len
+    has_3
+    mkList
+    toStr
+    concat
+    has_10
+    squared_nums
+    evenSquared
+    findSet
+    foldFn
+    ;
+}
 
-if has_10 == false then
-  {
-    message = "the number 10 does not exists";
-  }
-else
-  #the builtins.trace takes 2 args <message> & <value>
+# Practical Exercises
+# ===================
+/*
+  Try these evaluations:
 
-  toStr
+  1. Check mixed list structure:
+     nix eval -f lists.nix mixed --json | jq
 
-#  (builtins.trace) " number 10 exists " (builtins.elem 10 concat)
+  2. Access nested property:
+     nix eval -f lists.nix '(builtins.elemAt mixed 4).prop.program'
 
-#5  mkList
+  3. Filter demonstration:
+     nix eval -f lists.nix findSet --json | jq
 
-#4 evenSquared
+  4. Fold result verification:
+     nix eval -f lists.nix foldFn
 
-#3 squared_nums
+  5. Conditional check:
+     nix eval -f lists.nix \
+       'if has_10 then "Exists" else "Missing"'
 
-#1. (builtins.elemAt mixed 4).prop.name
+  6. Handle mixed types:
+     nix eval -f lists.nix \
+       'builtins.filter (x: builtins.isString x) mixed'
+*/
 
-# if the list contains mixed types and you need to find the set dynamically
+# Important Notes
+# ===============
+/*
+  Key Observations:
+  - Nix lists are homogeneous by convention
+  - Mixed-type lists require careful handling
+  - Indexing starts at 0
+  - All list operations are immutable (create new lists)
 
-#uncomment this one and comment no. 1 after playing around with no.1
-#2.  if findSet != [] then (builtins.head findSet).prop.name else null
+  Common Pitfalls:
+  - Using % operator: Use lib.mod instead
+  - Direct index access without bounds checking
+  - Assuming list mutability
+
+  Performance Tips:
+  - foldl' is strict version for better performance
+  - genList is optimized for large lists
+  - ++ operator creates new lists (O(n) operation)
+*/
