@@ -51,6 +51,7 @@ let
 
   # section 5:
   concatList = lib.concatLists [
+    # concats a list
     [
       1
       2
@@ -63,9 +64,64 @@ let
     ]
   ];
 
-  #section 6:
-  splitStr = lib.splitString "-" "foo-bar-baz";
+  # section 6:
+  splitStr = lib.splitString "-" "foo-bar-baz"; # splits a string given the delimeter field
   splitStr1 = lib.splitString "/" "/usr/bin/env";
+
+  # section 7:
+  mergeTwoSetsRecv =
+    lib.attrsets.recursiveUpdate # if this seems confusing at first but when you play around with it more ,  you will get it
+      {
+        a = {
+          x = 10;
+        };
+      }
+      {
+        a = {
+          y = 20;
+          z = 30;
+        };
+      };
+
+  /*
+    lib.attrsets.recursiveUpdate
+    {
+      boot.loader.grub.enable = true;
+      boot.loader.grub.device = "/dev/hda";
+    }
+    {
+      boot.loader.grub.device = "";
+    };
+  */
+
+  # section 8:
+  generateAttrs = lib.genAttrs [ "a" "b" ] (name: "x" + name); # generates an attribute set from a list of names and a function
+
+  # section 9:
+  partit = lib.lists.partition (v: v < 5) [
+    # Splits the elements of a list in two lists, right and wrong, depending on the evaluation of a predicate
+    # usage : to separate valid/invalid inputs
+    5
+    6
+    7
+    8
+    2
+    3
+    1
+    6
+    10
+    11
+  ];
+
+  fF = lib.findFirst (v: v > 7) 7 [
+    # Finds the first element in the list matching the specified predicate or return default if no such element exists. here , 7 is the default value
+
+    5
+    6
+    7
+    8
+    9
+  ];
 
 in
 {
@@ -80,5 +136,9 @@ in
     concatList
     splitStr
     splitStr1
+    mergeTwoSetsRecv
+    generateAttrs
+    partit
+    fF
     ;
 }
