@@ -49,6 +49,24 @@ let
     };
   };
 
+  # section 5:
+  concatList = lib.concatLists [
+    [
+      1
+      2
+      3
+    ]
+    [
+      4
+      5
+      6
+    ]
+  ];
+
+  #section 6:
+  splitStr = lib.splitString "-" "foo-bar-baz";
+  splitStr1 = lib.splitString "/" "/usr/bin/env";
+
 in
 {
   inherit
@@ -59,5 +77,8 @@ in
     misingAttr
     filterAttr
     filterRecursively
+    concatList
+    splitStr
+    splitStr1
     ;
 }
