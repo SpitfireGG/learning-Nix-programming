@@ -72,7 +72,6 @@ in
   check = valCheck;
 }
 
-
 ## 5. File Operations Debugging
 /*
   Shows file handling with error tracing and safety checks
@@ -150,11 +149,9 @@ let
   lib = import <nixpkgs/lib>;
   nestedStructure = {
     a = 10;
-    b = 20;
     c = 30;
     v = {
       x = 1;
-      y = 2;
       z = 3;
       lazy = "Unevaluated section";
     };
