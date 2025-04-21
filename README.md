@@ -19,33 +19,33 @@ This repository takes a hands-on approach to learning Nix, structured like popul
 
 ## Nix Language Fundamentals
 
-### Writing first program, Hello world < covered in ch00 >
+# Nix Programming Guide
 
-### Data types < covered in ch01 >
+## Getting Started
+- Writing first program, Hello world (covered in ch00)
 
-### Data structures
-#### Sets < covered in ch02 >
-#### Lists < covered in ch03 >
+## Core Concepts
+- Data types (covered in ch01)
 
+## Data Structures
+- Sets (covered in ch02)
+- Lists (covered in ch03)
 
-### Functions - Extended < covered inn ch04 > 
+## Functional Programming
+- Functions - Extended (covered in ch04)
 
-### Lazy Evaluation < covered in ch05 > 
+## Lazy & Strict evaluations
+- Lazy Evaluation (covered in ch05)
 
-### Set attribute selection, inheritance and merging < covered in ch06 >
+## Advanced Features
+- Set attribute selection, inheritance and merging (covered in ch06)
+- Working with files & paths (covered in ch07)
+- Debugging & Tracing (covered in ch08)
 
-### Working with files & paths < covered in ch07 >
-
-### Working with files & paths < covered in ch07 >
-
-### Debugging & Tracing < covered in ch08 >
-
-### Working with common libraries < covered in ch09 >
-
-### Working with Module system utilities < covered in ch10 >
-
-### Understanding function signatures < covered in ch11 >
-
+## Ecosystem Integration
+- Working with common libraries (covered in ch09)
+- Working with Module system utilities (covered in ch10)
+- Understanding function signatures (covered in ch11)
 ---
 
 ## 🛠 Practical Applications
