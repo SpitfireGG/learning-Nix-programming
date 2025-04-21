@@ -1,3 +1,8 @@
+## this is an extended version of the chapter working with functions
+# ===================================================
+
+# this chapter covers the fundamentals of nix functions, we will learn more about the ellpise , partial applications, that might confuse some of the programmers out there but it is written with well documented comments for readibility and understanding
+
 let
 
   ## section 1: working  with epllipse, go through the docs throughly to get a good understanding , epllipse comes very ofter when working with nix
