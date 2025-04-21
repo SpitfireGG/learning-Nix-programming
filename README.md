@@ -19,24 +19,34 @@ This repository takes a hands-on approach to learning Nix, structured like popul
 
 ## Nix Language Fundamentals
 
-### Basic Types
-- Integers • 42
-- Floats • 3.1415
-- Strings • "hello"
-- Booleans • true, false
-- Null • null
-- Paths • ./my-file.txt
+### Writing first program, Hello world < covered in ch00 >
 
-### Data Structures
-- Lists • [1 2 3]
-- Attribute Sets • { a = 1; b = 2; }
+### Data types < covered in ch01 >
 
-### Built-in Functions & Constructors
+### Data structures
+#### Sets < covered in ch02 >
+#### Lists < covered in ch03 >
 
-### Function Definitions
-- Basic Functions
-- Parameter Patterns
-- Recursive Functions
+
+### Functions - Extended < covered inn ch04 > 
+
+### Lazy Evaluation < covered in ch05 > 
+
+### Set attribute selection, inheritance and merging < covered in ch06 >
+
+### Working with files & paths < covered in ch07 >
+
+### Working with files & paths < covered in ch07 >
+
+### Debugging & Tracing < covered in ch08 >
+
+### Working with common libraries < covered in ch09 >
+
+### Working with Module system utilities < covered in ch10 >
+
+### Understanding function signatures < covered in ch11 >
+
+---
 
 ## 🛠 Practical Applications
 - File System Operations
@@ -66,10 +76,10 @@ focuses on practical understanding over theoretical perfection:
 - Learn what you'll actually use
 
 ```nix
-# Traditional documentation
-recursive_learning = throw "headache";
+# official docs & other resources 
+recursive_learning = throw "confusion";
 
-# Our approach
+# this repo focuses on 
 learning_path = lib.foldl (acc: x -> acc + x) 0 [
   "clarity"
   "examples"
@@ -79,14 +89,14 @@ learning_path = lib.foldl (acc: x -> acc + x) 0 [
 
 ---
 
-<p>You can contibute to the repo for the new commers to learn actively, you're contributions matter:
-If you:</p>
-🐛 Found a bug? Open an Issue</br>
-💡 Got an idea? Suggest Content</br>
-📝 Fixed a typo? Submit PR</br>
-</p>
+You can **contibute** to the repo for beginners and intermediates to learn actively, you'r contributions **matter**:
+If you:
+    **Found a bug?** Open an Issue
+    **Got an idea?** Suggest Content
+    **Fixed a typo?** Submit PR
+
 
 <div align="center">
-🔧 Under Active Development - New content weekly!</br>
+🔧 Under Active Development - New content daily</br>
 ⭐ Star to Show Support - Helps others find this resource</br>
 </div>
