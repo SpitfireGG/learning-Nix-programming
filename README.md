@@ -1,6 +1,6 @@
 # 🐧 Learn Nix Programming Through Practice
 
-*A comprehensive, beginner-friendly guide to learning the Nix language  form the ground up - because functional packaging should be fun!*
+*A comprehensive, beginner-friendly guide to learning the Nix language  form the ground up down to last details *
 
 <div align="center">
 
@@ -14,10 +14,9 @@
 
 ## 🚀 Getting Started
 
-This repository takes a hands-on approach to learning Nix, structured like popular programming guides but with a functional twist. Perfect for those who learn by doing!
+This repository is intended to give beginners and intermediate programmers familirity to Nix programming in indepth way, documentation is heavily packed explaining every single steps
 
-
-## Nix Language Fundamentals
+## Core fundamentals & Advanced concepts
 
 ### Getting Started
 - Writing first program, Hello world (covered in ch00)
@@ -46,7 +45,7 @@ This repository takes a hands-on approach to learning Nix, structured like popul
 - Understanding function signatures (covered in ch11)
 ---
 
-## 🛠 Practical Applications
+## 🛠 Practical Usage
 - File System Operations
 - Lazy Evaluation Patterns
 - Debugging Techniques 🐛 (Coming Soon!)
@@ -55,6 +54,7 @@ This repository takes a hands-on approach to learning Nix, structured like popul
 <summary>Future Content Preview</summary>
 
 - Derivation Patterns
+- Working with Nix flakes
 - NixOS Module System
 - Advanced Package Composition
 - Performance Optimization
