@@ -1,4 +1,4 @@
-# 🐧 Learn Nix Programming Through Practice
+#  Learn Nix Programming 
 
 *A comprehensive, beginner-friendly guide to learning the Nix language  form the ground up down to last details *
 
@@ -48,7 +48,7 @@ This repository is intended to give beginners and intermediate programmers famil
 ## 🛠 Practical Usage
 - File System Operations
 - Lazy Evaluation Patterns
-- Debugging Techniques 🐛 (Coming Soon!)
+- Debugging Techniques 
 
 <details>
 <summary>Future Content Preview</summary>
