@@ -1,5 +1,4 @@
-{ lib, ... }:
-{
+{ lib, ... }: {
   options = {
     enable = lib.mkOption {
       type = lib.types.bool;
@@ -16,8 +15,12 @@
       default = false;
       description = "enable creation";
     };
+    extraOptions = lib.mkOption {
+      type = lib.types.listOf lib.types.unspecified;
+      default = false;
+      description = "enable extra options";
+
+    };
   };
 }
-
-
 
