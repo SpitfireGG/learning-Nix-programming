@@ -1,3 +1,33 @@
-** the following is a great explaination i found when at first i wanted to know about the   `mkFunctions` **
+# Understanding NixOS Configuration Priorities
 
-### For example, you could have a module a.nix that sets services.nginx.enable = X; and another module b.nix that sets services.nginx.enable = Y;. But X is not necessarily equal to Y, causing a conflict in your configuration: should nginx be enabled or not?                                       To solve this, NixOS introduced a couple of functions to assign a “priority” to a value for some option. The most primitive function to do this is mkOverride 679 (the link to the function’s definition doesn’t help a whole lot here in understanding the inner workings because its implementation does not really reveal any of its effects). mkOverride accepts two arguments: a priority (which is a number) and a value. When NixOS detects a conflict in your configuration, it uses the priority to determine which value to prefer; lower priority values are preferred over higher ones.
+## The Conflict Problem
+
+When multiple modules set the same option differently:
+
+```nix
+# a.nix
+services.nginx.enable = true;
+
+# b.nix 
+services.nginx.enable = false;
+Question: Which value should NixOS choose?
+```
+
+The Solution: Priority System
+NixOS uses priority functions to resolve conflicts:
+
+mkOverride <priority> <value>
+Lower priority numbers win conflicts
+
+Example: mkOverride 100 true
+
+How It Works:
+NixOS detects conflicting values
+
+1. Compares their priorities
+2. Selects the value with the lowest priority number
+
+Key Points
+50 = mkForce (strongest)
+100 = Normal assignments
+1000 = mkDefault (weakest)
