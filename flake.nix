@@ -1,3 +1,0 @@
-{
-  description = "learn nix";
-}
