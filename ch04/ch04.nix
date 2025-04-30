@@ -52,6 +52,15 @@ let
     }:
     a + b;
 
+  # what happens here ?
+  someFunction =
+    {
+      a,
+      b,
+      c,
+    }:
+    a + b;
+
   # Attribute set params ( Attributes are key-value pairs just like map in programming language like GO)
   setAttr = { a, b }: a + b;
 
@@ -104,6 +113,11 @@ in
     c = 30;
     d = 40;
   }; # here c and d are ignored ( you might have seen this in flake.nix or other nix files )
+
+  someF = someFunction {
+    a = 10;
+    b = 20;
+  }; # logs out 'called  without required args'
 
   setAttrRes = setAttr {
     a = 1;
