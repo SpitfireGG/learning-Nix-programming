@@ -6,14 +6,14 @@ Welcome to the exercises for Chapter 01 of nixspin! These challenges will help y
 
 Structure:
 
-├── ch01.nix
-├── exercises
-│   ├── ex001.nix
-│   ├── ex002.nix
-│   ├── ex003.nix
-│   └── ex004.nix
-├── readme.md
-└── run.sh
+├── ch01.nix</br>
+├── exercises</br>
+│   ├── ex001.nix</br>
+│   ├── ex002.nix</br>
+│   ├── ex003.nix</br>
+│   └── ex004.nix</br>
+├── readme.md</br>
+└── run.sh</br>
 
 
 ### Getting Started
