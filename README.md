@@ -1,6 +1,7 @@
-#  Learn Nix Programming 
+#  nixspin ❄️ 
 
-*A comprehensive, beginner-friendly guide to learning the Nix language  form the ground up down to last details *
+Welcome to nixspin.
+nixspin is a repo dedicated for beginners and intermediate nix & nixos users to gain more ensight on the Nix programming language. This documentation covers all the core areas of the nix programming language along with some exercises to actually learn Nix through practice
 
 <div align="center">
 
@@ -10,13 +11,8 @@
 
 </div>
 
----
-
 ## 🚀 Getting Started
-
-This repository is intended to give beginners and intermediate programmers familirity to Nix programming in indepth way, documentation is heavily packed explaining every single steps
-
-## Core fundamentals & Advanced concepts
+---
 
 ### Getting Started
 - Writing first program, Hello world (covered in ch00)
@@ -43,15 +39,14 @@ This repository is intended to give beginners and intermediate programmers famil
 - Working with common libraries (covered in ch09)
 - Working with Module system utilities (covered in ch10)
 - Understanding function signatures (covered in ch11)
----
 
-## 🛠 Practical Usage
+### 🛠 Practical Usage
 - File System Operations
 - Lazy Evaluation Patterns
 - Debugging Techniques 
 
 <details>
-<summary>Future Content Preview</summary>
+<summary>Future contents & ongoing progress</summary>
 
 - Derivation Patterns
 - Working with Nix flakes
@@ -59,9 +54,13 @@ This repository is intended to give beginners and intermediate programmers famil
 - Advanced Package Composition
 - Performance Optimization
 - Real-world Project Templates
+
 </details>
 
+
+
 ## 💡 Why This Guide?
+---
 
 <div align="center">
 Learning Path
@@ -95,6 +94,6 @@ If you:
 
 
 <div align="center">
-🔧 Under Active Development - New content daily</br>
+🔧 Under Active Development</br>
 ⭐ Star to Show Support - Helps others find this resource</br>
 </div>
