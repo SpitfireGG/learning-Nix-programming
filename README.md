@@ -1,6 +1,6 @@
 #  nixspin ❄️ 
 
-Welcome to nixspin.
+Welcome to nixspin.</br>
 nixspin is a repo dedicated for beginners and intermediate nix & nixos users to gain more ensight on the Nix programming language. This documentation covers all the core areas of the nix programming language along with some exercises to actually learn Nix through practice
 
 <div align="center">
