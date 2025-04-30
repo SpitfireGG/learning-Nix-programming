@@ -34,16 +34,24 @@ let
   # -------------------------------
   # Basic accessors
   first = builtins.head nums; # First element
+
+  take3 = lib.take 3 nums; # keeps 3 elements and removes the  remaining
+
+  drop4 = lib.drop 4 nums; # drops 4 elements and keeps one
+
   remaining = builtins.tail nums; # All except first
+
   grabFromIdx = builtins.elemAt nums 2; # Element at index 2
 
   # List analysis
   len = builtins.length nums; # get the length
+
   has_3 = builtins.elem 3 nums;
 
   # Section 3: List Generation
   # --------------------------
   mkList = builtins.genList (i: i * 2) 5; # [0 2 4 6 8]
+
   toStr = builtins.genList (i: "item-${toString i}") 3; # ["item-0" "item-1" "item-2"]
 
   # Section 4: List Manipulation
@@ -92,6 +100,8 @@ in
     mixed
     first
     remaining
+    take3
+    drop4
     grabFromIdx
     len
     has_3
