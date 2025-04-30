@@ -38,7 +38,7 @@ This section covers essential functions for accessing and analyzing lists, using
 
 ### 4. List Manipulation & Functional Operations (`## Section 4`)
 
-*   **Concatenation (`++`):** The `++` operator combines two lists into a new, single list (e.g., `concat`). This is a "shallow merge".
+*   **Concatenation (`++`):** The `++` operator combines two lists into a new, single list (e.g., `concat`). This is a "shallow merge" as it will create a new copy of the list and won't work for deeply nested lists.
 *   **Functional Programming:** Applying functions over lists is very common in Nix.
     *   `builtins.any predicate list`: Returns `true` if the `predicate` function returns `true` for *at least one* element in the list (e.g., `numsLessThan4`).
     *   `builtins.map function list`: Creates a *new* list by applying `function` to *every* element of the input list (e.g., `squared_nums`).
@@ -61,7 +61,7 @@ This section dives into more complex list processing techniques.
 
 The final `in` block uses `inherit` to make all the defined variables (like `nums`, `first`, `len`, `mkList`, `foldFn`, etc.) available as attributes of the set returned when this Nix file is evaluated. The comments within the `inherit` block attempt to group the exported variables by the section they were primarily defined or demonstrated in.
 
-## Practical Exercises (`## Practical exercises`)
+## Practical Exercises (`Practical exercises`)
 
 This section provides example `nix eval -f lists.nix ...` commands. These allow you to run the Nix code from your terminal and directly observe the results of specific variable definitions or expressions, helping to solidify understanding of how these list operations work. Using `--json | jq` is suggested for complex outputs like sets or nested lists to view them clearly.
 
