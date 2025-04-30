@@ -12,7 +12,6 @@ nixspin is a repo dedicated for beginners and intermediate nix & nixos users to 
 </div>
 
 ## 🚀 Getting Started
----
 
 ### Getting Started
 - Writing first program, Hello world (covered in ch00)
