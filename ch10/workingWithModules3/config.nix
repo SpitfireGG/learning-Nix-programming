@@ -1,9 +1,18 @@
 { config, lib, ... }: {
 
   config = {
-    enable = true;
 
-    strType = "custom string value";
+    # can be either null or a boolean
+    # enable = true;
+    enable = null;
+
+    # can either be a string or attrset of string
+    # strType = "custom string value";
+    strType = {
+      a = "fizz";
+      b = "buzz";
+      c = "bar";
+    };
 
     enumType = "large"; # Must be one of ["small" "medium" "large"]
 
@@ -14,6 +23,7 @@
       y = 10;
       z = 15; # Can add new attributes
     };
+    oneOfDecl = "string";
 
     subMod = {
       name = "important process";
