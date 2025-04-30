@@ -2,12 +2,13 @@
 with lib; {
   options = {
     enable = mkOption {
-      type = types.bool;
-      description = "boolean type";
+      type = types.nullOr types.bool;
+      description = "either null or a boolean type";
     };
     strType = mkOption {
-      type = types.str; # types.string is deprecated
-      description = "string type";
+      type = types.either types.str (types.attrsOf types.str);
+      description =
+        "either a string or a set of string key values can be passed";
     };
     enumType = mkOption {
       type = types.enum [ "small" "medium" "large" ];
@@ -27,12 +28,16 @@ with lib; {
       };
       description = "int attribute set";
     };
+    oneOfDecl = mkOption {
+      type = types.oneOf [ types.bool types.str types.int ];
+      description = "one of the values can be provided ";
+    };
     subMod = mkOption {
       type = types.submodule {
         options = {
           name = mkOption {
             type = types.str;
-            default = "some random process";
+            default = "some random sys process";
           };
           priority = mkOption {
             type = types.int;
