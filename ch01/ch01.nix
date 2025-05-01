@@ -14,38 +14,62 @@
 */
 
 {
-  # working with strings
-  print = "basic data types";
+  # strings & multi_line string
+  msg = "basic data types";
+
   multi_line = ''
     this is a multi_line string
     hello there!
   '';
+
   message =
     let
       name = "readers"; # here 'name' is the binding
     in
     "Hello there ${name}"; # and the binding can be accessed here in the 'in' block cuz the variables is in the scope
 
-  # working with numbers and floats
+  # integer operations
   int_operation =
     let
       x = 1;
       y = 2;
     in
     x + y;
+
+  # float operations
   float_operation =
     let
       a = 10.20;
       b = 11.203;
     in
     b - a;
+
+  #  this will cause an integer overflow, the computations does not round to 0 like in some programming  languages
   max_operation =
     let
       d = 9223372036854775807; # Max 64-bit signed int
     in
     d + 1;
 
-}
-# you can run the nix program by running in the termainal
+  # the famous binary xor swap
+  swap =
+    let
+      # you will  understand functions in later chapters, just hang  on!  &  keep going.
+      xorSwap = x: y: builtins.bitXor x y;
+      x = 2;
+      y = 3;
 
-# nix eval --file ch01.nix <one of the declarations like print, message etc>
+      x_swap = xorSwap (xorSwap x y) x;
+      y_swap = xorSwap (xorSwap x y) y;
+    in
+    {
+      swapped = {
+        x = x_swap;
+        y = y_swap;
+      };
+    };
+
+}
+# you can run the nix program by running the following command in the termainal
+
+# nix eval --file ch01.nix <one of the declarations like msg, message etc>
