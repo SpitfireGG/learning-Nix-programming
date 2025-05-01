@@ -1,4 +1,4 @@
-# Chapter 7: Understanding Filesystem Interaction in Nix
+# Files & paths
 
 ## Introduction
 
