@@ -1,13 +1,15 @@
-# Debugging in Nix: From Basic Tracing to Advanced Techniques
-# -----------------------------------------------------------
+## Debugging in Nix: From Basic Tracing to Advanced Techniques
+# ====================================================================
 
-## 1. Basic Tracing with builtins.trace
 /*
-  shows simple message logging while returning values
-  run the following codes with (--json | jq) for best logs tracing
+    The chapter covers most Techniques for debugging and tracing logs in nix from Basic to advanced
+
+NOTE:   run the following codes with (--json | jq) for best logs tracing
 */
 
-/*
+
+## 1. Basic Tracing with builtins.trace
+
   let
     integerVal = 10;
     stringVal = "string";
@@ -20,24 +22,21 @@
     builtins.trace "Types matched!" {
       inherit integerVal stringVal;
     }
-*/
+
 
 ## 2. Value Tracing with traceVal
 # Logs values without modifying them - great for quick inspections
 
-/*
   let
     lib = import <nixpkgs/lib>;
     str = "tracing-with-debug.traceVal";
     valTrace = lib.debug.traceVal str;
   in
   valTrace
-*/
 
 ## 3. Custom Tracing with traceValFn
 # Applies custom formatting before logging - perfect for complex data
 
-/*
   let
     lib = import <nixpkgs/lib>;
     x = { a = 1; b = 2; c = 3; };
@@ -46,12 +45,9 @@
     ) x;
   in
   y
-*/
 
-## 4. Type Checking Example
-# Demonstrates runtime type validation with debug tracing
+## 4. Runtime type checking 
 
-/*
   let
     debug = true;
     x = 10;
@@ -69,12 +65,9 @@
     inherit x y;
     check = valCheck;
   }
-*/
 
 ## 5. File Operations Debugging
-# Shows file handling with error tracing and safety checks
 
-/*
   let
     lib = import <nixpkgs/lib>;
     path = ./test.txt;
@@ -86,12 +79,10 @@
     ) (builtins.readFile path);
   in
   fileContent
-*/
 
 ## 6. Safe File Reading with Error Handling
-# Implements try/catch pattern for robust file operations
+#  try/catch pattern for robust file operations
 
-/*
   let
     filePath = ./non-existing-file.txt;
     readFileSafe = path:
@@ -111,12 +102,9 @@
         builtins.trace "Error caught: ${result.value}" null;
   in
   fileContent
-*/
 
 ## 7. Custom Debug Utilities
-# Creates reusable debug functions for complex workflows
 
-/*
   let
     lib = import <nixpkgs/lib>;
 
@@ -134,12 +122,10 @@
     readFileContent = Debug "File read" filePath (builtins.readFile filePath);
     readDir = Debug "Directory scan" dir (builtins.readDir dir);
   }
-*/
 
 ## 8. Deep Structure Tracing
 # demonstrates a nested data inspection with lazy evaluation control
 
-/*
   let
     lib = import <nixpkgs/lib>;
     nestedStructure = {
@@ -161,7 +147,8 @@
     trace1 = lib.debug.traceSeq nestedStructure nestedStructure;
     trace2 = lib.debug.traceSeq nestedStructure.moreNesting nestedStructure.moreNesting;
   }
-*/
+
+## 9:  using assert for guaranteed behaviour
 with import <nixpkgs> { };
 let
   func =
