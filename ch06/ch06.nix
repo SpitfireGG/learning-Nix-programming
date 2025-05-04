@@ -204,6 +204,23 @@ in
     # Check a value expected to be missing
     missingValue = (lib.recursiveUpdate defaultConfig userConfig).database.type or "unknown"; # Should be "unknown"
   };
-}
 
-# Reminder: Try creating your own pseudo configuration function or merging scenarios!
+  # === Section 6: Merge if condition is true ===
+  service1 =
+    let
+
+      baseConfig_1 = {
+        enable = true;
+        configName = "service1 internals";
+        description = "configurations of service1";
+
+      };
+    in
+    baseConfig_1
+    // lib.optionalAttrs (baseConfig_1.enable) {
+      additionalConfig = {
+        enable = true;
+        description = "additional configuration for service2";
+      };
+    };
+}
