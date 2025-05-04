@@ -59,24 +59,9 @@ let
           if e then "https://${serviceName}:${toString serviceport}" else "service is not running"
         }";
 
-      service2 =
-        let
-          baseConfig = {
-            pname = "nixspin";
-            enable = true;
-          };
-        in
-        baseConfig
-        // pkgs.lib.optionalAttrs (baseConfig.enable) {
-          additionalConfig = {
-            enable = true;
-            description = "additional configuration for service2";
-          };
-        };
     };
   };
 in
 {
   serviceDesc = services.settings.description;
-  sv2 = services.settings.service2;
 }
